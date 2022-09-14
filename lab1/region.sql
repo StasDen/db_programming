@@ -1,0 +1,4 @@
+SELECT 
+    *
+FROM
+    mydb.region
