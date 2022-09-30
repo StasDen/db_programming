@@ -9,5 +9,6 @@ SELECT
 FROM
     outcomes
 WHERE
-    battle = 'Guadalcanal' AND result = 'OK'
-ORDER BY ship ASC;  
+    battle = 'Guadalcanal'
+        AND result != 'sunk'
+ORDER BY ship DESC;  

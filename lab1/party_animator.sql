@@ -4,7 +4,7 @@ FROM
     mydb.party_animator;
    
 -- SELECT #9
--- Animators, who do unique perfomances      
+-- Animators who do unique perfomances      
 SELECT 
     party_animator.first_name,
     party_animator.last_name,

@@ -4,7 +4,7 @@ FROM
     mydb.client;
     
 -- SELECT #2
--- Clients, who own "Gold customer" card      
+-- Clients who own "Gold customer" card      
 SELECT 
     client.second_name, client.phone_number
 FROM
