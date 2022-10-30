@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/party_animators_scheme
+    username: root
+    password: Most_secure_root_password1
+    driver-class-name: com.mysql.cj.jdbc.Driver
