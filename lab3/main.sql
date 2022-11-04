@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS party_animator (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(25) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
