@@ -38,4 +38,9 @@ public class OrderControllerImp implements OrderController {
     public int update(Integer id, Order order) {
         return orderService.update(id, order);
     }
+
+    @Override
+    public List<Order> getVipOrders() {
+        return orderService.getVipOrders();
+    }
 }

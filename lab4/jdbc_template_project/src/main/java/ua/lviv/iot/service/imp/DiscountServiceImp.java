@@ -38,4 +38,9 @@ public class DiscountServiceImp implements DiscountService {
     public int update(Integer id, Discount discount) {
         return discountDao.update(id, discount);
     }
+
+    @Override
+    public Optional<Discount> getDiscountByHolidayName(String name) {
+        return discountDao.getDiscountByHolidayName(name);
+    }
 }

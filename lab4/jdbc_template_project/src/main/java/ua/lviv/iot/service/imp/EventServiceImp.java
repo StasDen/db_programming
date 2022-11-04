@@ -38,4 +38,9 @@ public class EventServiceImp implements EventService {
     public int delete(Integer id) {
         return eventDao.delete(id);
     }
+
+    @Override
+    public List<Event> getAllEventsByCityId(Integer id) {
+        return eventDao.getAllEventsByCityId(id);
+    }
 }

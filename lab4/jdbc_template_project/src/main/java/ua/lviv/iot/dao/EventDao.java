@@ -5,7 +5,5 @@ import ua.lviv.iot.domain.Event;
 import java.util.List;
 
 public interface EventDao extends GeneralDao<Event, Integer> {
-    // Integer getVisitorsNumByEventName(String name);
-
-    // List<Event> getAllEventsByCityId(Integer id);
+    List<Event> getAllEventsByCityId(Integer id);
 }

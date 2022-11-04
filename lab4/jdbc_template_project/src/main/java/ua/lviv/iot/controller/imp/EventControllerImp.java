@@ -38,4 +38,9 @@ public class EventControllerImp implements EventController {
     public int update(Integer id, Event event) {
         return eventService.update(id, event);
     }
+
+    @Override
+    public List<Event> getAllEventsByCityId(Integer id) {
+        return eventService.getAllEventsByCityId(id);
+    }
 }

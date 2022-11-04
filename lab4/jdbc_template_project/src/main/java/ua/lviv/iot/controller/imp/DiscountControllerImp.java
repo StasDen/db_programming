@@ -38,4 +38,9 @@ public class DiscountControllerImp implements DiscountController {
     public int update(Integer id, Discount discount) {
         return discountService.update(id, discount);
     }
+
+    @Override
+    public Optional<Discount> getDiscountByHolidayName(String name) {
+        return discountService.getDiscountByHolidayName(name);
+    }
 }

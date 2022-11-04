@@ -18,6 +18,7 @@ public class EventDaoImp implements EventDao {
     public static final String CREATE = "INSERT event(name, animators_num, visitors_num, date, address, duration_in_hours, city_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE = "DELETE FROM event WHERE id=?";
     public static final String UPDATE = "UPDATE event SET name=?, animators_num=?, visitors_num=?, date=?, address=?, duration_in_hours=?, city_id=? WHERE id=?";
+    public static final String GET_ALL_EVENTS_BY_CITY_ID = "SELECT * FROM event WHERE city_id=?";
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
@@ -52,5 +53,10 @@ public class EventDaoImp implements EventDao {
     @Override
     public int update(Integer id, Event event) {
         return jdbcTemplate.update(UPDATE, event.getName(), event.getAnimatorsNum(), event.getVisitorsNum(), event.getDate(), event.getAddress(), event.getDurationInHours(), event.getCityId(), id);
+    }
+
+    @Override
+    public List<Event> getAllEventsByCityId(Integer id) {
+        return jdbcTemplate.query(GET_ALL_EVENTS_BY_CITY_ID, BeanPropertyRowMapper.newInstance(Event.class), id);
     }
 }

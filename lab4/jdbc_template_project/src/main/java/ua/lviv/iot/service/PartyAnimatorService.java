@@ -5,5 +5,5 @@ import ua.lviv.iot.domain.PartyAnimator;
 import java.util.List;
 
 public interface PartyAnimatorService extends GeneralService<PartyAnimator, Integer> {
-    // List<String> getAllUniquePerformances();
+    List<PartyAnimator> getAllUniquePerformances();
 }

@@ -38,4 +38,9 @@ public class PartyAnimatorControllerImp implements PartyAnimatorController {
     public int update(Integer id, PartyAnimator partyAnimator) {
         return partyAnimatorService.update(id, partyAnimator);
     }
+
+    @Override
+    public List<PartyAnimator> getAllUniquePerformances() {
+        return partyAnimatorService.getAllUniquePerformances();
+    }
 }

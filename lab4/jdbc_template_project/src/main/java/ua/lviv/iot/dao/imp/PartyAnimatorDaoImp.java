@@ -18,6 +18,7 @@ public class PartyAnimatorDaoImp implements PartyAnimatorDao {
     public static final String CREATE = "INSERT party_animator(first_name, last_name, phone_number, unique_performance, work_experience_in_years, order_id) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String DELETE = "DELETE FROM party_animator WHERE id=?";
     public static final String UPDATE = "UPDATE party_animator SET first_name=?, last_name=?, phone_number=?, unique_performance=?, work_experience_in_years=?, order_id=? WHERE id=?";
+    public static final String GET_ALL_UNIQUE_PERFORMANCES = "SELECT * FROM party_animator WHERE unique_performance IS NOT NULL";
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
@@ -52,5 +53,10 @@ public class PartyAnimatorDaoImp implements PartyAnimatorDao {
     @Override
     public int update(Integer id, PartyAnimator partyAnimator) {
         return jdbcTemplate.update(UPDATE, partyAnimator.getFirstName(), partyAnimator.getLastName(), partyAnimator.getPhoneNumber(), partyAnimator.getUniquePerformance(), partyAnimator.getWorkExperienceInYears(), partyAnimator.getOrderId(), id);
+    }
+
+    @Override
+    public List<PartyAnimator> getAllUniquePerformances() {
+        return jdbcTemplate.query(GET_ALL_UNIQUE_PERFORMANCES, BeanPropertyRowMapper.newInstance(PartyAnimator.class));
     }
 }

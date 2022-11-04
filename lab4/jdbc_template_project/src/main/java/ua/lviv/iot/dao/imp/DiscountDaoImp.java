@@ -18,6 +18,7 @@ public class DiscountDaoImp implements DiscountDao {
     public static final String CREATE = "INSERT discount(name, percentage) VALUES (?, ?)";
     public static final String DELETE = "DELETE FROM discount WHERE id=?";
     public static final String UPDATE = "UPDATE discount SET name=?, percentage=? WHERE id=?";
+    public static final String GET_DISCOUNT_BY_HOLIDAY_NAME = "SELECT * FROM discount WHERE name=?";
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
@@ -52,5 +53,17 @@ public class DiscountDaoImp implements DiscountDao {
     @Override
     public int update(Integer id, Discount discount) {
         return jdbcTemplate.update(UPDATE, discount.getName(), discount.getPercentage(), id);
+    }
+
+    @Override
+    public Optional<Discount> getDiscountByHolidayName(String name) {
+        Optional<Discount> discount;
+
+        try {
+            discount = Optional.ofNullable(jdbcTemplate.queryForObject(GET_DISCOUNT_BY_HOLIDAY_NAME, BeanPropertyRowMapper.newInstance(Discount.class), name));
+        } catch (EmptyResultDataAccessException e) {
+            discount = Optional.empty();
+        }
+        return discount;
     }
 }

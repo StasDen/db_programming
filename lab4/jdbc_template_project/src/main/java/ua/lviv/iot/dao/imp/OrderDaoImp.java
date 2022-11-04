@@ -3,6 +3,7 @@ package ua.lviv.iot.dao.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.lviv.iot.dao.OrderDao;
+import ua.lviv.iot.domain.EntertainmentAgency;
 import ua.lviv.iot.domain.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -18,6 +19,7 @@ public class OrderDaoImp implements OrderDao {
     public static final String CREATE = "INSERT `order`(name, cost_in_usd, event_id, discount_id, client_id, entertainment_agency_id) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String DELETE = "DELETE FROM `order` WHERE id=?";
     public static final String UPDATE = "UPDATE `order` SET name=?, cost_in_usd=?, event_id=?, discount_id=?, client_id=?, entertainment_agency_id=? WHERE id=?";
+    public static String GET_VIP_ORDERS = "SELECT * FROM `order` WHERE cost_in_usd >= 900";
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
@@ -52,5 +54,10 @@ public class OrderDaoImp implements OrderDao {
     @Override
     public int update(Integer id, Order order) {
         return jdbcTemplate.update(UPDATE, order.getName(), order.getCostInUsd(), order.getEventId(), order.getDiscountId(), order.getClientId(), order.getEntertainmentAgencyId(), id);
+    }
+
+    @Override
+    public List<Order> getVipOrders() {
+        return jdbcTemplate.query(GET_VIP_ORDERS, BeanPropertyRowMapper.newInstance(Order.class));
     }
 }

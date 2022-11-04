@@ -38,4 +38,9 @@ public class OrderServiceImp implements OrderService {
     public int update(Integer id, Order order) {
         return orderDao.update(id, order);
     }
+
+    @Override
+    public List<Order> getVipOrders() {
+        return orderDao.getVipOrders();
+    }
 }

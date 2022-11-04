@@ -38,4 +38,9 @@ public class PartyAnimatorServiceImp implements PartyAnimatorService {
     public int update(Integer id, PartyAnimator partyAnimator) {
         return partyAnimatorDao.update(id, partyAnimator);
     }
+
+    @Override
+    public List<PartyAnimator> getAllUniquePerformances() {
+        return partyAnimatorDao.getAllUniquePerformances();
+    }
 }
