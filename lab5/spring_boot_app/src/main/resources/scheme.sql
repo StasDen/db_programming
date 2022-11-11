@@ -5,12 +5,10 @@ SET
 SET
 @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE SCHEMA IF NOT EXISTS party_animators_scheme DEFAULT CHARACTER SET utf8;
+CREATE SCHEMA IF NOT EXISTS party_animators DEFAULT CHARACTER SET utf8;
 USE
-party_animators_scheme;
+party_animators;
 
-#
-Using `` because of MySQL keywords
 DROP TABLE IF EXISTS city;
 DROP TABLE IF EXISTS `client`;
 DROP TABLE IF EXISTS client_card;
@@ -18,14 +16,10 @@ DROP TABLE IF EXISTS consultant;
 DROP TABLE IF EXISTS discount;
 DROP TABLE IF EXISTS entertainment_agency;
 DROP TABLE IF EXISTS `event`;
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS ordering;
 DROP TABLE IF EXISTS party_animator;
 DROP TABLE IF EXISTS region;
 
-#
-======
-# Tables
-# ======
 CREATE TABLE IF NOT EXISTS region
 (
     id
@@ -226,7 +220,7 @@ CREATE TABLE IF NOT EXISTS entertainment_agency
 ) VISIBLE)
     ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `order`
+CREATE TABLE IF NOT EXISTS ordering
 (
     id
     INT
@@ -350,10 +344,6 @@ CREATE TABLE IF NOT EXISTS consultant
 ) VISIBLE)
     ENGINE = InnoDB;
 
-#
-======
-# Alters
-# ======
 ALTER TABLE city
     ADD CONSTRAINT fk_city_region1
         FOREIGN KEY (region_id)
@@ -369,7 +359,7 @@ ALTER TABLE `event`
             ON UPDATE NO ACTION;
 
 ALTER TABLE `client`
-    ADD INDEX second_name_idx (second_name),  # Adding one more index
+    ADD INDEX second_name_idx (second_name),
 ADD CONSTRAINT fk_client_client_card1
   FOREIGN KEY (client_card_id)
   REFERENCES client_card (id)
@@ -394,7 +384,7 @@ NO ACTION
   ON
 UPDATE NO ACTION;
 
-ALTER TABLE `order`
+ALTER TABLE ordering
     ADD INDEX name_idx (`name`),
 ADD CONSTRAINT fk_order_event1
   FOREIGN KEY (event_id)
@@ -432,7 +422,7 @@ UPDATE NO ACTION;
 ALTER TABLE party_animator
     ADD CONSTRAINT fk_animator_order1
         FOREIGN KEY (order_id)
-            REFERENCES `order` (id)
+            REFERENCES ordering (id)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION;
 
@@ -443,14 +433,10 @@ ALTER TABLE consultant
             ON DELETE NO ACTION
             ON UPDATE NO ACTION;
 
-#
-=======
-# Inserts
-# =======
-INSERT INTO region(id, `name`) VALUES
-  (1, "Volyn"),
-  (2, "Lviv"),
-  (3, "Kyiv");
+INSERT INTO region(id, `name`)
+VALUES (1, "Volyn"),
+       (2, "Lviv"),
+       (3, "Kyiv");
 
 INSERT INTO city(id, `name`, region_id)
 VALUES (1, "Lutsk", 1),
@@ -538,7 +524,7 @@ VALUES (1, "Oleksij", "Movchan", "+380 50 906 2366", NULL, 3, 1),
        (9, "Valerij", "Sushko", "+380 50 392 0114", NULL, 3, 4),
        (10, "Tamara", "Tereshchenko", "+380 50 924 8357", NULL, NULL, 5);
 
-INSERT INTO `order`(id, `name`, cost_in_usd, event_id, discount_id, client_id, entertainment_agency_id)
+INSERT INTO ordering(id, `name`, cost_in_usd, event_id, discount_id, client_id, entertainment_agency_id)
 VALUES (1, "Birthday", 400, 1, 6, 5, 1),
        (2, "Birthday-party", 900, 2, NULL, 2, 5),
        (3, "Wedding", 650, 9, 1, 1, 8),
@@ -549,12 +535,6 @@ VALUES (1, "Birthday", 400, 1, 6, 5, 1),
        (8, "School graduation", 450, 4, 5, 6, 9),
        (9, "Son's Birthday", 250, 7, 5, 6, 3),
        (10, "Kids party", 600, 3, 6, 7, 6);
-
-#
-Showing indexes
-SHOW INDEX FROM `order`;
-SHOW
-INDEX FROM `client`;
 
 SET
 SQL_MODE=@OLD_SQL_MODE;

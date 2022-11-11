@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class City {
+public class Region {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -13,10 +13,6 @@ public class City {
     @Basic
     @Column(name = "name")
     private String name;
-
-    @Basic
-    @Column(name = "region_id")
-    private Integer regionId;
 
     public Integer getId() {
         return id;
@@ -34,14 +30,6 @@ public class City {
         this.name = name;
     }
 
-    public Integer getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(Integer regionId) {
-        this.regionId = regionId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -52,12 +40,12 @@ public class City {
             return false;
         }
 
-        City city = (City) o;
-        return Objects.equals(id, city.getId()) && Objects.equals(name, city.getName()) && Objects.equals(regionId, city.getRegionId());
+        Region region = (Region) o;
+        return Objects.equals(id, region.getId()) && Objects.equals(name, region.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, regionId);
+        return Objects.hash(id, name);
     }
 }
