@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ua.lviv.iot.repository.OrderingRepository;
 import ua.lviv.iot.service.OrderingService;
 import ua.lviv.iot.domain.Ordering;
-import ua.lviv.iot.exception.OrderingNotFountException;
+import ua.lviv.iot.exception.OrderingNotFoundException;
 
 import javax.transaction.Transactional;
 
@@ -17,7 +17,7 @@ public class OrderingServiceImp implements OrderingService {
     OrderingRepository orderingRepository;
 
     public Ordering findById(Integer id) {
-        return orderingRepository.findById(id).orElseThrow(() -> new OrderingNotFountException(id));
+        return orderingRepository.findById(id).orElseThrow(() -> new OrderingNotFoundException(id));
     }
 
     public List<Ordering> findAll() {
@@ -32,7 +32,7 @@ public class OrderingServiceImp implements OrderingService {
 
     @Transactional
     public void update(Integer id, Ordering uOrder) {
-        Ordering order = orderingRepository.findById(id).orElseThrow(() -> new OrderingNotFountException(id));
+        Ordering order = orderingRepository.findById(id).orElseThrow(() -> new OrderingNotFoundException(id));
         order.setName(uOrder.getName());
         order.setCostInUsd(uOrder.getCostInUsd());
         order.setEventId(uOrder.getEventId());
@@ -44,7 +44,7 @@ public class OrderingServiceImp implements OrderingService {
 
     @Transactional
     public void delete(Integer id) {
-        Ordering ordering = orderingRepository.findById(id).orElseThrow(() -> new OrderingNotFountException(id));
+        Ordering ordering = orderingRepository.findById(id).orElseThrow(() -> new OrderingNotFoundException(id));
         orderingRepository.delete(ordering);
     }
 }

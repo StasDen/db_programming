@@ -53,4 +53,18 @@ public class ClientController {
         clientService.delete(clientId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping(value = "/client/{clientId}/ordering/{orderingId}")
+    public ResponseEntity<ClientDto> addOrderingForClient(@PathVariable Integer clientId, @PathVariable Integer orderingId) {
+        Client client = clientService.addOrderingForClient(clientId, orderingId);
+        ClientDto clientDto = clientDtoAssembler.toModel(client);
+        return new ResponseEntity<>(clientDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/client/{clientId}/ordering/{orderingId}")
+    public ResponseEntity<ClientDto> removeOrderingForClient(@PathVariable Integer clientId, @PathVariable Integer orderingId) {
+        Client client = clientService.removeOrderingForClient(clientId, orderingId);
+        ClientDto clientDto = clientDtoAssembler.toModel(client);
+        return new ResponseEntity<>(clientDto, HttpStatus.OK);
+    }
 }
