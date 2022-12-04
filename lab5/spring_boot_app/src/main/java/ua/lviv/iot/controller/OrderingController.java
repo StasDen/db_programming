@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/orderings")
+@RequestMapping(value = "/api/orderings")
 public class OrderingController {
     @Autowired
     private OrderingService orderingService;

@@ -2,6 +2,7 @@ package ua.lviv.iot.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Client {
@@ -26,11 +27,15 @@ public class Client {
     @Column(name = "client_card_id")
     private Integer clientCardId;
 
-    public java.lang.Integer getId() {
+    @ManyToMany
+    @JoinTable(name = "client_ordering", schema = "my_library", joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "ordering_id", referencedColumnName = "id", nullable = false))
+    private Set<Ordering> orderings;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(java.lang.Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,12 +63,20 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    public java.lang.Integer getClientCardId() {
+    public Integer getClientCardId() {
         return clientCardId;
     }
 
     public void setClientCardId(Integer clientCardId) {
         this.clientCardId = clientCardId;
+    }
+
+    public Set<Ordering> getOrderings() {
+        return orderings;
+    }
+
+    public void setOrderings(Set<Ordering> orderings) {
+        this.orderings = orderings;
     }
 
     @Override

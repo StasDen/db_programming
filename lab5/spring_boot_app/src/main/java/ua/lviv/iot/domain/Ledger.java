@@ -1,7 +1,7 @@
 package ua.lviv.iot.domain;
 
 import javax.persistence.*;
-import java.security.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -16,8 +16,8 @@ public class Ledger {
     private String client;
 
     @Basic
-    @Column(name = "order")
-    private String order;
+    @Column(name = "ordering")
+    private String ordering;
 
     @Basic
     @Column(name = "action")
@@ -25,7 +25,7 @@ public class Ledger {
 
     @Basic
     @Column(name = "time")
-    private Timestamp time;
+    private Date time;
 
     @Basic
     @Column(name = "user")
@@ -47,12 +47,12 @@ public class Ledger {
         this.client = client;
     }
 
-    public String getOrder() {
-        return order;
+    public String getOrdering() {
+        return ordering;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setOrdering(String ordering) {
+        this.ordering = ordering;
     }
 
     public String getAction() {
@@ -63,11 +63,11 @@ public class Ledger {
         this.action = action;
     }
 
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -90,6 +90,6 @@ public class Ledger {
         }
 
         Ledger ledger = (Ledger) o;
-        return Objects.equals(id, ledger.getId()) && Objects.equals(client, ledger.getClient()) && Objects.equals(order, ledger.getOrder()) && Objects.equals(action, ledger.getAction()) && Objects.equals(time, ledger.getTime()) && Objects.equals(user, ledger.getUser());
+        return Objects.equals(id, ledger.getId()) && Objects.equals(client, ledger.getClient()) && Objects.equals(ordering, ledger.getOrdering()) && Objects.equals(action, ledger.getAction()) && Objects.equals(time, ledger.getTime()) && Objects.equals(user, ledger.getUser());
     }
 }

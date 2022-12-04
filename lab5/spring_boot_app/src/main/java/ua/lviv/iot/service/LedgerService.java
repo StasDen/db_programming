@@ -2,5 +2,10 @@ package ua.lviv.iot.service;
 
 import ua.lviv.iot.domain.Ledger;
 
-public interface LedgerService extends GeneralService<Ledger, Integer> {
+import java.util.List;
+
+public interface LedgerService {
+    List<Ledger> findAll();
+
+    Ledger findById(Integer id);
 }

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/cities")
+@RequestMapping(value = "/api/cities")
 public class CityController {
     @Autowired
     private CityService cityService;

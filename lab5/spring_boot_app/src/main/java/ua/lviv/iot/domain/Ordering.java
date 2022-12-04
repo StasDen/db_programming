@@ -2,6 +2,7 @@ package ua.lviv.iot.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Ordering {
@@ -33,6 +34,9 @@ public class Ordering {
     @Basic
     @Column(name = "entertainment_agency_id")
     private Integer entertainmentAgencyId;
+
+    @ManyToMany(mappedBy = "orderings")
+    private Set<Client> clients;
 
     public Integer getId() {
         return id;
@@ -88,6 +92,14 @@ public class Ordering {
 
     public void setEntertainmentAgencyId(Integer id) {
         this.entertainmentAgencyId = id;
+    }
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
     }
 
     @Override

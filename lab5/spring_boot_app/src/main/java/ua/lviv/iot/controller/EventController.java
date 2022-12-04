@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/events")
+@RequestMapping(value = "/api/events")
 public class EventController {
     @Autowired
     private EventService eventService;
